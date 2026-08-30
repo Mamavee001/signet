@@ -31,6 +31,8 @@ export const LIMITS = {
   authChallenge: 20,
   /** Sign-out-everywhere: authenticated and rare, so a tight bucket is plenty. */
   authRevoke: 10,
+  /** Builds/verifies a CLI-link challenge — same signing cost as sep10. */
+  cliLink: 12,
   /** Plain reads; generous, still bounded. */
   read: 60,
   /**
