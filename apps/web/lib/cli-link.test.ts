@@ -9,7 +9,12 @@ import {
   getCliLinkDomain,
   CliLinkError,
 } from './cli-link.ts';
-import { buildChallenge, verifyChallenge, getServerKeypair, getNetworkPassphrase } from './sep10.ts';
+import {
+  buildChallenge,
+  verifyChallenge,
+  getServerKeypair,
+  getNetworkPassphrase,
+} from './sep10.ts';
 
 // `getServerKeypair()` caches on first call, so this must be set before any
 // test invokes it (directly or indirectly via the build/verify functions).
@@ -58,10 +63,7 @@ test('a web sign-in challenge is rejected as CLI-link proof', () => {
   const signInChallenge = buildChallenge(client.publicKey());
   const signed = sign(signInChallenge, client);
 
-  assert.throws(
-    () => verifyCliLinkChallenge(signed),
-    /home domain|InvalidChallenge/i,
-  );
+  assert.throws(() => verifyCliLinkChallenge(signed), /home domain|InvalidChallenge/i);
 });
 
 test('a CLI-link challenge is rejected as a sign-in proof', () => {
@@ -69,10 +71,7 @@ test('a CLI-link challenge is rejected as a sign-in proof', () => {
   const linkChallenge = buildCliLinkChallenge(client.publicKey(), 'testnet');
   const signed = sign(linkChallenge, client);
 
-  assert.throws(
-    () => verifyChallenge(signed),
-    /home domain|InvalidChallenge/i,
-  );
+  assert.throws(() => verifyChallenge(signed), /home domain|InvalidChallenge/i);
 });
 
 test('a signed sign-in challenge still verifies fine as a sign-in proof (sanity check)', () => {

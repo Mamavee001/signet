@@ -78,7 +78,10 @@ export async function GET(req: Request) {
       );
       return NextResponse.json({ error: err.message }, { status: 400, headers: CORS_HEADERS });
     }
-    return NextResponse.json({ error: 'Could not build challenge' }, { status: 400, headers: CORS_HEADERS });
+    return NextResponse.json(
+      { error: 'Could not build challenge' },
+      { status: 400, headers: CORS_HEADERS },
+    );
   }
 }
 
@@ -88,7 +91,10 @@ export async function POST(req: Request) {
 
   const { transaction } = (await req.json().catch(() => ({}))) as { transaction?: string };
   if (!transaction) {
-    return NextResponse.json({ error: 'transaction is required' }, { status: 400, headers: CORS_HEADERS });
+    return NextResponse.json(
+      { error: 'transaction is required' },
+      { status: 400, headers: CORS_HEADERS },
+    );
   }
 
   let clientAccountId: string;
@@ -108,7 +114,10 @@ export async function POST(req: Request) {
   }
 
   logger.info({ address: clientAccountId }, 'cliLink.verified');
-  return NextResponse.json({ verified: true, publicKey: clientAccountId }, { headers: CORS_HEADERS });
+  return NextResponse.json(
+    { verified: true, publicKey: clientAccountId },
+    { headers: CORS_HEADERS },
+  );
 }
 
 export function OPTIONS() {
