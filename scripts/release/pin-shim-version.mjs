@@ -28,4 +28,6 @@ for (const dep of Object.keys(pkg.optionalDependencies ?? {})) {
 }
 
 writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
-console.log(`Pinned ${pkg.name}@${version} and its ${Object.keys(pkg.optionalDependencies).length} optional dependencies`);
+console.log(
+  `Pinned ${pkg.name}@${version} and its ${Object.keys(pkg.optionalDependencies).length} optional dependencies`,
+);
